@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Run at $(date '+%F %T')" >> ~/bitcoin_tracker/run.lo
+echo "Run at $(date '+%F %T')" >> ~/bitcoin_tracker/run.log
 
 url="https://crypto.com/eea/price/bitcoin"
 html=$(curl -s "$url")
