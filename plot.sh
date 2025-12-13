@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA="/home/krish/bitcoin_tracker/plot_data.tsv"
+DATA="/home/krish/bitcoin_tracker/plot_data_final2.tsv"
 OUTDIR="/home/krish/bitcoin_tracker"
 
 if [ ! -f "$DATA" ]; then
@@ -69,11 +69,13 @@ gnuplot <<EOF
 set terminal png size 1200,600
 set output "$OUTDIR/8_price_trend.png"
 set datafile separator "\t"
-set title "Price Trend"
+set title "Price Trend (Moving Average)"
 set xlabel "Entry Number"
 set ylabel "Price"
 set grid
-plot "$DATA" using 1:2 with lines lw 2 linecolor rgb "orange" title "Price Trend"
+plot \
+  "$DATA" using 1:2 title "Price" with lines lw 1 linecolor rgb "orange", \
+  "" using 1:6 title "Trend (MA-5)" with lines lw 2 linecolor rgb "red"
 EOF
 
 gnuplot <<EOF
@@ -99,4 +101,3 @@ plot "$DATA" using 5:2 with points pointtype 7 linecolor rgb "cyan" title "Avg v
 EOF
 
 echo "All plots generated."
-
